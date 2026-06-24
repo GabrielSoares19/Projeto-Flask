@@ -16,10 +16,12 @@ if ENV_PATH.exists():
 else:
     load_dotenv()
 
-DATABASE_URL = os.getenv("DATABASE_URL") 
+DATABASE_URL = os.getenv(
+    "DATABASE_URL",
+    f"sqlite:///{BASE_DIR / 'instance' / 'timecerto.db'}"
+)
+
 print("DATABASE_URL =", DATABASE_URL)
-if not DATABASE_URL:
-    raise ValueError("A variável DATABASE_URL não foi encontrada no arquivo .env ou nas variáveis de ambiente")
 
 def parse_bool(value, default=False):
     if value is None:
